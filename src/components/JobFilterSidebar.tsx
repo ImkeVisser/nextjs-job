@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { Button } from "./ui/button";
 import { jobFilterSchema, JobFilterValues } from "@/lib/validation";
 import { redirect } from "next/navigation";
-import FormSubmitButton from "./FormSubmitButton";
+import FormSubmitButton from "./ui/FormSubmitButton";
 
 async function filterJobs(formData:FormData) {
     "use server";
@@ -41,7 +41,7 @@ export default async function JobFilterSidebar({
 
     return (
         <aside className="sticky top-0 h-fit rounded-lg border bg-background p-4 md:w-[260px]">
-            <form action={filterJobs}>
+            <form action={filterJobs} key={JSON.stringify(defaultValues)}>
                 <div className="space-y-4">
                     <div className="flex flex-col gap-2">
                         <Label htmlFor="query">Search</Label>

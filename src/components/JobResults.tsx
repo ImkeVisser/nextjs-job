@@ -23,11 +23,11 @@ export default async function JobResults({filterValues: {
     const searchFilter: Prisma.JobWhereInput = searchString
     ? {
         OR: [
-          { title: searchString},
-          { companyName: searchString },
-          { type: searchString },
-          { locationType: searchString },
-          { location: searchString },
+          { title: {contains: searchString}},
+          { companyName: {contains: searchString}}, 
+          { type:  {contains: searchString}},
+          { locationType: {contains: searchString}},
+          { location: {contains: searchString}},
         ],
       }
     : {};
@@ -46,14 +46,14 @@ export default async function JobResults({filterValues: {
         where,
         orderBy: { createdAt: "desc" }
       })
-      
+
     return (
         <div className="space-y-4 grow">
             {jobs.map(job => (
             <JobListItem key={job.id} job={job} />
             ))}
             {jobs.length === 0 && (
-                <p className="m-auto text-center">
+                <p>
                     No jobs found. Try adjusting your search filters.
                 </p>
             )}
