@@ -1,5 +1,7 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import H1 from "@/components/ui/H1"
 import { Input } from "@/components/ui/input"
@@ -11,9 +13,9 @@ import Select from "@/components/ui/Select"
 import { JOB_TYPES, LOCATION_TYPES } from "@/lib/job-types"
 import { createJobSchema, CreateJobValues } from "@/lib/validation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { X } from "lucide-react"
 import { draftToMarkdown } from "markdown-draft-js"
 import { useForm } from "react-hook-form"
+import { createJobPosting } from "./actions"
 
 export default function NewJobForm() {
     const form = useForm<CreateJobValues>({
@@ -38,7 +40,20 @@ export default function NewJobForm() {
     } = form;
 
     async function onSubmit(values:CreateJobValues) {
-        alert(JSON.stringify(values, null, 2))
+        const formData = new FormData();
+
+        Object.entries(values).forEach(([key, value]) => {
+            if(value) {
+                formData.append(key, value);
+            }
+        })
+
+        try {
+           await createJobPosting(formData) 
+        } catch (error) {
+            console.error(error)
+            alert("something went wrong, please try again.");
+        }
     }
 
     return (

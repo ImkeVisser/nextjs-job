@@ -27,17 +27,17 @@ function getTitle({query, type, location, remote}: JobFilterValues){
   return `${titlePrefix}${titleSuffics}`
 }
 
-export function generateMetaData({
-  searchParams: {query, type, location, remote}
+export function generateMetadata({
+  searchParams: { query, type, location, remote },
 }: PageProps): Metadata {
   return {
     title: `${getTitle({
       query,
       type,
       location,
-      remote: remote === "true"
-    })} | Next Job}`
-  }
+      remote: remote === "true",
+    })} | Flow Jobs`,
+  };
 }
 
 export default async function Home({

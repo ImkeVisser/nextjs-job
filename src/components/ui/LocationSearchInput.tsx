@@ -1,8 +1,8 @@
 "use client"
 
-import { GoogleMap, useJsApiLoader, StandaloneSearchBox, Libraries } from "@react-google-maps/api"
+import { useJsApiLoader, StandaloneSearchBox, Libraries } from "@react-google-maps/api"
 import { Input } from "./input"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 const libraries: Libraries = ["places"]
 
@@ -10,7 +10,7 @@ interface LocationSearchInputProps extends React.InputHTMLAttributes<HTMLInputEl
     onLocationSelected: (location: string) => void
 }
 
-export default function locationSearchInput ({onLocationSelected, ...props }: LocationSearchInputProps) {
+export default function LocationSearchInput ({onLocationSelected, ...props }: LocationSearchInputProps) {
     const searchBox = useRef<google.maps.places.SearchBox>();
     
     const { isLoaded } = useJsApiLoader({
