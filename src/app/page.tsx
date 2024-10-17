@@ -9,11 +9,12 @@ interface PageProps {
       query?:string,
       type?:string,
       location?:string,
-      remote?:string,     
+      remote?:string, 
+      page?: string    
   }
 }
 
-function getTitle({query, type, location, remote}: JobFilterValues){
+function getTitle({query, type, location, remote }: JobFilterValues){
   const titlePrefix = query
   ? `${query} jobs`
   : type
@@ -45,7 +46,8 @@ export default async function Home({
     query,
     type,
     location,
-    remote
+    remote,
+    page
   }
 }: PageProps) {
 
@@ -66,7 +68,7 @@ export default async function Home({
     </div>
       <section className="flex flex-col md:flex-row gap-4">
       <JobFilterSidebar defaultValues={filterValues}/>
-      <JobResults filterValues={filterValues}/>
+      <JobResults filterValues={filterValues} page={page ? parseInt(page) : undefined}/>
     </section>
   </main>
   );
